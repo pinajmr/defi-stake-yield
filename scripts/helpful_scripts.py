@@ -10,7 +10,7 @@ from brownie import (
 
 
 NON_FORKED_LOCAL_BLOCKCHAIN_ENVIROMENTS = ["hardhat", "ganache", "development"]
-LOCAL_BLOCKCHAIN_ENVIROMENTS = NON_FORKED_LOCAL_BLOCKCHAIN_ENVIROMENTS + [
+LOCAL_BLOCKCHAIN_ENVIRONMENTS = NON_FORKED_LOCAL_BLOCKCHAIN_ENVIROMENTS + [
     "mainnet-fork",
     "mainnet-fork-dev",
     "binance-fork",
@@ -32,7 +32,7 @@ DECIMALS = 18
 def get_account(index=None, id=None):
     if index:
         return accounts[index]
-    if network.show_active() in LOCAL_BLOCKCHAIN_ENVIROMENTS:
+    if network.show_active() in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         return accounts[0]
     if id:
         return accounts.load(id)
@@ -41,7 +41,7 @@ def get_account(index=None, id=None):
 
 def get_contract(contract_name):
     contract_type = contract_to_mock[contract_name]
-    if network.show_active() in LOCAL_BLOCKCHAIN_ENVIROMENTS:
+    if network.show_active() in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         if len(contract_type) <= 0:
             deploy_mocks()
         contract = contract_type[-1]
